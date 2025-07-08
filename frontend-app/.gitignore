@@ -1,0 +1,49 @@
+# Node
+node_modules/
+
+# SvelteKit/Vite/Adapter
+/.svelte-kit/
+/.vercel/
+/.netlify/
+/.wrangler/
+dist/
+build/
+output/
+prerendered/
+static/
+.output/
+
+# OS
+.DS_Store
+Thumbs.db
+Icon?
+*~
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# VSCode
+.vscode/
+
+# Coverage
+coverage/
+
+# Swap files
+*.swp
+*.swo
+
+# Local
+*.local
