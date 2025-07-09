@@ -2,33 +2,21 @@
   import ItemList from './ItemList.svelte';
 
   // ItemListで定義したItemの型をインポートまたは再定義します
-  type Item = {
-    item_id: string;
-    item_label: string;
-    db_column_name: string;
-    data_type: 'string' | 'number' | 'checkbox';
-    length: number | null;
-    is_list_display: boolean;
-    is_detail_display: boolean;
-    is_search_filter: boolean;
-    sort_key: number;
-  };
-
-  // このコンポーネントが管理する「画面定義」の型
-  // ★変更点: Svelteのkeyとして使用するユニークなidプロパティを追加
-  type View = {
-    id: string; 
-    view_id: string;
-    parent_view_id: string;
-    content_title: string;
-    url: string;
-    sort_key: number | null;
-    layout_key: string;
-    items: Item[]; // 項目定義のリストを内包します
-  };
+  import type { Item, View } from '$lib/types';
 
   // 親コンポーネント(ViewList)から渡されるプロパティ
   export let view: View;
+
+  // Viewリスト（親候補）を受け取る想定（なければ空配列）
+  export let allViews: View[] = [];
+
+  // parent_view_id候補リスト
+  $: parentViewOptions = ['_manage_header', 'dummy', ...allViews.filter(v => v.id !== view.id).map(v => v.view_id).filter(Boolean)];
+
+  // URLアシスト
+  function assistUrl(pattern: string) {
+    view.url = pattern;
+  }
 
   // 削除イベントを親に通知するための準備
   import { createEventDispatcher } from 'svelte';
@@ -55,7 +43,14 @@
     </label>
     <label>
       Parent View ID
-      <input type="text" placeholder="例: msiroji" bind:value={view.parent_view_id} />
+      <div style="display: flex; align-items: center; gap: 4px;">
+        <input type="text" list="parent-view-list" bind:value={view.parent_view_id} style="flex:1; min-width:120px;" />
+        <datalist id="parent-view-list">
+          {#each parentViewOptions as opt}
+            <option value={opt}>{opt}</option>
+          {/each}
+        </datalist>
+      </div>
     </label>
     <label>
       画面タイトル
@@ -63,7 +58,11 @@
     </label>
     <label>
       URL
-      <input type="text" placeholder="例: ../msiroji" bind:value={view.url} />
+      <div style="display: flex; gap: 4px; align-items: center; min-width:180px;">
+        <input type="text" placeholder="例: ../msiroji" bind:value={view.url} style="flex:1; min-width:100px;" />
+        <button type="button" class="assist-btn" on:click={() => assistUrl('.')}>.</button>
+        <button type="button" class="assist-btn" on:click={() => assistUrl('../')}>../</button>
+      </div>
     </label>
     <label>
       表示順
@@ -135,5 +134,19 @@
     border: 1px solid #cfd8dc;
     border-radius: 4px;
     font-size: 1em;
+  }
+  .assist-btn {
+    padding: 4px 8px;
+    font-size: 0.95em;
+    border: 1px solid #b0bec5;
+    background: #f0f4f8;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 32px;
+    min-height: 28px;
+    margin-left: 2px;
+  }
+  .assist-btn:hover {
+    background: #e0e7ef;
   }
 </style>

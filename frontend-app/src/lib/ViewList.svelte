@@ -2,51 +2,34 @@
   import ViewDefinition from './ViewDefinition.svelte';
 
   // これらの型定義は、将来的には src/lib/types.ts のような共有ファイルにまとめるのが理想的です
-  type Item = {
-    item_id: string;
-    item_label: string;
-    db_column_name: string;
-    data_type: 'string' | 'number' | 'checkbox';
-    length: number | null;
-    is_list_display: boolean;
-    is_detail_display: boolean;
-    is_search_filter: boolean;
-    sort_key: number;
-  };
-
-  type View = {
-    id: string; // Svelteのkeyとして使用するユニークID
-    view_id: string;
-    parent_view_id: string;
-    content_title: string;
-    url: string;
-    sort_key: number | null;
-    layout_key: string;
-    items: Item[];
-  };
+import type { Item, View } from '$lib/types';
 
   // このコンポーネントが管理する画面定義のリスト
   export let views: View[] = [];
 
   // 新しい画面定義を追加する関数
+  function renumberViewSortKeys(arr: View[]): View[] {
+    return arr.map((view, idx) => ({ ...view, sort_key: idx + 1 }));
+  }
+
   function handleAddView() {
     const newView: View = {
-      id: crypto.randomUUID(), // 新しい項目にユニークなIDを付与
+      id: crypto.randomUUID(),
       view_id: '',
       parent_view_id: '',
       content_title: '',
       url: '',
-      sort_key: null,
+      sort_key: 0, // 仮
       layout_key: '',
-      items: [] // 最初は空の項目リストを持つ
+      items: []
     };
-    views = [...views, newView];
+    views = renumberViewSortKeys([...views, newView]);
   }
 
   // 子コンポーネントからの'delete'イベントを処理する関数
   function handleDeleteView(event: CustomEvent) {
     const idToDelete = event.detail.id;
-    views = views.filter(view => view.id !== idToDelete);
+    views = renumberViewSortKeys(views.filter(view => view.id !== idToDelete));
   }
 </script>
 
@@ -56,7 +39,7 @@
 
   <!-- views配列をループして、各要素に対してViewDefinitionコンポーネントを描画 -->
   {#each views as view (view.id)}
-    <ViewDefinition bind:view on:delete={handleDeleteView} />
+    <ViewDefinition bind:view allViews={views} on:delete={handleDeleteView} />
   {/each}
 
   <button on:click={handleAddView} class="add-view-button">

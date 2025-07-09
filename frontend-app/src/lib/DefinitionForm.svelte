@@ -3,27 +3,7 @@
   import ViewList from './ViewList.svelte';
 
   // このフォームが管理する、APIに送信するための全データの型定義
-  type Item = {
-    item_id: string;
-    item_label: string;
-    db_column_name: string;
-    data_type: 'string' | 'number' | 'checkbox';
-    length: number | null;
-    is_list_display: boolean;
-    is_detail_display: boolean;
-    is_search_filter: boolean;
-    sort_key: number;
-  };
-  type View = {
-    id: string;
-    view_id: string;
-    parent_view_id: string;
-    content_title: string;
-    url: string;
-    sort_key: number | null;
-    layout_key: string;
-    items: Item[];
-  };
+  import type { Item, View } from '$lib/types';
 
   // フォームの各部分のデータを保持する変数
   let targetInfo = {
