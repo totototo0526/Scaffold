@@ -1,7 +1,31 @@
 <script lang="ts">
+
     import Header from "$lib/Header.svelte";
     import DefinitionForm from "$lib/DefinitionForm.svelte";
     import ResponseDisplay from "$lib/ResponseDisplay.svelte";
+    import { onMount } from 'svelte';
+
+    // 取得した接続先リストを保持する変数
+    let targets: Array<{ target_id: string; target_display_name: string }> = [];
+    // 選択されたtarget_idを保持する変数
+    let selectedTargetId = '';
+
+    // ページが表示された時に一度だけ実行される
+    onMount(async () => {
+        // const apiUrl = 'https://n8n.totototo0526.site/webhook/get-targets';
+        const apiUrl = 'https://n8n.totototo0526.site/webhook-test/8d025c10-75db-4b8a-957b-ebb04c321683';
+        const response = await fetch(apiUrl);
+        if (response.ok) {
+            const data = await response.json();
+            if (Array.isArray(data)) {
+                targets = data;
+            } else if (data && typeof data === 'object') {
+                targets = [data];
+            } else {
+                targets = [];
+            }
+        }
+    });
 
     // APIの応答とローディング状態を管理する変数
     let apiResponse = {
@@ -49,7 +73,23 @@
     <Header />
 
     <div class="content-wrapper">
-        <!-- on:submitで、子コンポーネントからのイベントを捕捉し、handleApiSubmit関数を実行 -->
+        <form class="connection-form" autocomplete="off" on:submit|preventDefault>
+            <div class="form-row">
+                <label for="connection-select">接続先</label>
+                <select id="connection-select" name="connection" bind:value={selectedTargetId}>
+                    <option value="">選択してください</option>
+                    {#each targets as target}
+                        <option value={target.target_id}>{target.target_display_name}</option>
+                    {/each}
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="password-input">パスワード</label>
+                <input id="password-input" name="password" type="password" placeholder="パスワードを入力" />
+            </div>
+        </form>
+
+        <!-- 画面定義フォーム（既存） -->
         <DefinitionForm on:submit={handleApiSubmit} />
 
         <!-- 応答表示エリア -->
@@ -70,4 +110,27 @@
         margin: 0 auto;
         padding: 32px;
     }
+  .connection-form {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 32px;
+    align-items: flex-end;
+  }
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 200px;
+  }
+  label {
+    font-size: 0.95em;
+    color: #333;
+    margin-bottom: 2px;
+  }
+  select, input[type="password"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+  }
 </style>
