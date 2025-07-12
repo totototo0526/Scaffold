@@ -10,7 +10,7 @@
     let selectedTargetId = "";
 
     // ページが表示された時に一度だけ実行される
-    onMount(async () => {
+    onMount(() => {
         const fetchTargets = async () => {
             const apiUrl =
                 `https://n8n.totototo0526.site/webhook/8d025c10-75db-4b8a-957b-ebb04c321683?timestamp=${Date.now()}`;
