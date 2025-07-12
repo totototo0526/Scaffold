@@ -73,15 +73,14 @@
 
             const result = await response.json();
 
-            if (!response.ok) {
-                throw new Error(result.message || "APIエラーが発生しました");
+            // n8nから返却されたstatus/messageを画面に表示
+            if (result.status === 'success') {
+                apiResponse = { status: "success", data: { message: result.message } };
+            } else {
+                apiResponse = { status: "error", data: { message: result.message || 'APIエラーが発生しました' } };
             }
-
-            // 成功時の状態を更新
-            apiResponse = { status: "success", data: result };
         } catch (error: any) {
-            // エラー時の状態を更新
-            apiResponse = { status: "error", data: { message: error.message } };
+            apiResponse = { status: "error", data: { message: error.message || '通信エラーが発生しました。' } };
         }
     }
 </script>
