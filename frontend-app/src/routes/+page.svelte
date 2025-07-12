@@ -99,6 +99,7 @@
 
     <div class="content-wrapper">
         <div class="admin-link-container">
+            <a href="/admin/connections" class="admin-link">接続先を管理</a>
             <a href="/admin/connections/new" class="admin-link">新しい接続先を登録</a>
         </div>
         <form
