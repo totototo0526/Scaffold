@@ -11,20 +11,29 @@
 
     // ページが表示された時に一度だけ実行される
     onMount(async () => {
-        // const apiUrl = 'https://n8n.totototo0526.site/webhook/get-targets';
-        const apiUrl =
-            "https://n8n.totototo0526.site/webhook/8d025c10-75db-4b8a-957b-ebb04c321683";
-        const response = await fetch(apiUrl);
-        if (response.ok) {
-            const data = await response.json();
-            if (Array.isArray(data)) {
-                targets = data;
-            } else if (data && typeof data === "object") {
-                targets = [data];
-            } else {
-                targets = [];
+        const fetchTargets = async () => {
+            const apiUrl =
+                `https://n8n.totototo0526.site/webhook/8d025c10-75db-4b8a-957b-ebb04c321683?timestamp=${Date.now()}`;
+            const response = await fetch(apiUrl);
+            if (response.ok) {
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    targets = data;
+                } else if (data && typeof data === "object") {
+                    targets = [data];
+                } else {
+                    targets = [];
+                }
             }
-        }
+        };
+
+        fetchTargets();
+
+        window.addEventListener('pageshow', fetchTargets);
+
+        return () => {
+            window.removeEventListener('pageshow', fetchTargets);
+        };
     });
 
     // APIの応答とローディング状態を管理する変数
