@@ -12,6 +12,10 @@
     message: ''
   };
 
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
   async function handleSubmit() {
     apiResponse = { status: 'loading', message: '' };
 
@@ -39,8 +43,16 @@
       const result = await response.json();
 
       if (response.ok && result.status === 'success') {
-        alert('登録に成功しました！トップページに戻ります。');
-        window.location.href = '/';
+        apiResponse = { status: 'success', message: '登録に成功しました！' };
+        dispatch('registerSuccess');
+        // Clear form fields
+        target_id = '';
+        target_display_name = '';
+        db_host = '';
+        db_port = null;
+        db_name = '';
+        db_user = '';
+        db_password = '';
       } else {
         apiResponse = { status: 'error', message: result.message || '不明なエラーが発生しました。' };
       }

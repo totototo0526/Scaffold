@@ -1,5 +1,6 @@
 <script lang="ts">
   import Header from '$lib/Header.svelte';
+  import NewConnectionForm from '$lib/NewConnectionForm.svelte';
   import { onMount } from 'svelte';
 
   let targets: Array<{ target_id: string; target_display_name: string }> = [];
@@ -48,37 +49,42 @@
 <main>
   <Header />
   <div class="content-wrapper">
-    <h2>接続先DB管理</h2>
+    <h1>接続先DBの管理</h1>
 
-    {#if message.text}
-      <div class="message {message.type}">{message.text}</div>
-    {/if}
-
-    <table>
-      <thead>
-        <tr>
-          <th>表示名</th>
-          <th>ターゲットID</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each targets as target}
+    <div class="management-section">
+      <h2>登録済みリスト</h2>
+      {#if message.text}
+        <div class="message {message.type}">{message.text}</div>
+      {/if}
+      <table>
+        <thead>
           <tr>
-            <td>{target.target_display_name}</td>
-            <td>{target.target_id}</td>
-            <td>
-              <button on:click={() => deleteTarget(target.target_id, target.target_display_name)}>
-                削除
-              </button>
-            </td>
+            <th>表示名</th>
+            <th>ターゲットID</th>
+            <th>操作</th>
           </tr>
-        {/each}
-      </tbody>
-    </table>
-     <div class="admin-link-container">
-            <a href="/admin/connections/new" class="admin-link">新しい接続先を登録</a>
-     </div>
+        </thead>
+        <tbody>
+          {#each targets as target}
+            <tr>
+              <td>{target.target_display_name}</td>
+              <td>{target.target_id}</td>
+              <td>
+                <button on:click={() => deleteTarget(target.target_id, target.target_display_name)}>
+                  削除
+                </button>
+              </td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider" />
+
+    <div class="management-section">
+      <NewConnectionForm on:registerSuccess={fetchTargets} />
+    </div>
   </div>
 </main>
 
