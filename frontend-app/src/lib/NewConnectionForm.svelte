@@ -15,8 +15,7 @@
   async function handleSubmit() {
     apiResponse = { status: 'loading', message: '' };
 
-    // TODO: Replace with the actual n8n webhook URL for creating new connections
-    const n8nWebhookUrl = 'YOUR_N8N_WEBHOOK_URL_FOR_NEW_CONNECTIONS';
+    const n8nWebhookUrl = 'https://n8n.totototo0526.site/webhook/register-target';
 
     const payload = {
       target_id,
@@ -40,20 +39,13 @@
       const result = await response.json();
 
       if (response.ok && result.status === 'success') {
-        apiResponse = { status: 'success', message: result.message || '新しい接続先を登録しました。' };
-        // Optionally reset form fields
-        target_id = '';
-        target_display_name = '';
-        db_host = '';
-        db_port = null;
-        db_name = '';
-        db_user = '';
-        db_password = '';
+        alert('登録に成功しました！トップページに戻ります。');
+        window.location.href = '/';
       } else {
-        apiResponse = { status: 'error', message: result.message || '登録に失敗しました。' };
+        apiResponse = { status: 'error', message: result.message || '不明なエラーが発生しました。' };
       }
     } catch (error: any) {
-      apiResponse = { status: 'error', message: error.message || '通信エラーが発生しました。' };
+      apiResponse = { status: 'error', message: 'サーバーとの通信に失敗しました。' };
     }
   }
 </script>
