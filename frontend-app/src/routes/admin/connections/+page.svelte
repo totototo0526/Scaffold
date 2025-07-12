@@ -22,7 +22,7 @@
 
   async function deleteTarget(targetId: string, targetDisplayName: string) {
     if (confirm(`${targetDisplayName}を本当に削除しますか？`)) {
-      const response = await fetch('https://n8n.totototo0526.site/webhook/delete-target', {
+      const response = await fetch('https://n8n.totototo0526.site/webhook/bbd635be-f6bf-49c9-b1b3-488ca89bafcb', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
