@@ -89,6 +89,9 @@
     <Header />
 
     <div class="content-wrapper">
+        <div class="admin-link-container">
+            <a href="/admin/connections/new" class="admin-link">新しい接続先を登録</a>
+        </div>
         <form
             class="connection-form"
             autocomplete="off"
@@ -164,5 +167,25 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         font-size: 1em;
+    }
+
+    .admin-link-container {
+        text-align: right;
+        margin-bottom: 16px;
+    }
+
+    .admin-link {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #607d8b;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.9em;
+        transition: background-color 0.2s;
+    }
+
+    .admin-link:hover {
+        background-color: #455a64;
     }
 </style>
