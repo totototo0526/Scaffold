@@ -55,9 +55,8 @@
 
         // creator_id, views, itemsをトップレベルに展開
         const payload = {
-            db_target_id,
-            target_id,
-            password,
+            target_id: selectedTargetId,
+            password: password,
             creator_id: def.creator_id,
             views: def.views,
             items: def.items
