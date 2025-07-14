@@ -60,7 +60,10 @@
         <thead>
           <tr>
             <th>表示名</th>
-            <th>ターゲットID</th>
+            <th>ホスト</th>
+            <th>ポート</th>
+            <th>DB名</th>
+            <th>ユーザー</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -68,7 +71,10 @@
           {#each targets as target}
             <tr>
               <td>{target.target_display_name}</td>
-              <td>{target.target_id}</td>
+              <td>{target.db_host}</td>
+              <td>{target.db_port}</td>
+              <td>{target.db_name}</td>
+              <td>{target.db_user}</td>
               <td>
                 <button on:click={() => deleteTarget(target.target_id, target.target_display_name)}>
                   削除
