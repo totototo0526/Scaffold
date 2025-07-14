@@ -14,7 +14,7 @@ import type { Item, View } from '$lib/types';
 
   function handleAddView() {
     const newView: View = {
-      id: crypto.randomUUID(),
+      id: Math.random().toString(36).slice(2),
       view_id: '',
       parent_view_id: '',
       content_title: '',
@@ -43,7 +43,7 @@ import type { Item, View } from '$lib/types';
   {/each}
 
   <button type="button" on:click={handleAddView} class="add-view-button">
-    + 画面定義を追加
+    + 画面定義の追加
   </button>
 </div>
 

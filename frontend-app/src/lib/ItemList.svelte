@@ -15,7 +15,7 @@
       const n = Number(item.item_id);
       return !isNaN(n) && n > max ? n : max;
     }, 0);
-    const _internal_id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2);
+    const _internal_id = Math.random().toString(36).slice(2);
     const newItem: Item = {
       _internal_id,
       id: _internal_id,
