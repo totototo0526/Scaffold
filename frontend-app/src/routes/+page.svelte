@@ -8,6 +8,8 @@
     let targets: Array<{ target_id: string; target_display_name: string }> = [];
     // 選択されたtarget_idを保持する変数
     let selectedTargetId = "";
+    // 入力されたパスワードを保持する変数
+    let password = "";
 
     // ページが表示された時に一度だけ実行される
     onMount(() => {
@@ -49,9 +51,6 @@
 
         // 接続先IDとパスワードを取得
         const db_target_id = selectedTargetId;
-        const target_id = selectedTargetId;
-        const passwordInput = document.getElementById("password-input") as HTMLInputElement;
-        const password = passwordInput ? passwordInput.value : "";
 
         // creator_id, views, itemsをトップレベルに展開
         const payload = {
@@ -127,6 +126,7 @@
                     name="password"
                     type="password"
                     placeholder="パスワードを入力"
+                    bind:value={password}
                 />
             </div>
         </form>
