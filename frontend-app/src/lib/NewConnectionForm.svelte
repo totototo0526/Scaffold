@@ -19,7 +19,7 @@
   async function handleSubmit() {
     apiResponse = { status: 'loading', message: '' };
 
-    const n8nWebhookUrl = 'https://n8n.totototo0526.site/webhook-test/59d59722-ed03-4c28-a61c-c585b61d69dc';
+    const n8nWebhookUrl = 'https://n8n.totototo0526.site/webhook/59d59722-ed03-4c28-a61c-c585b61d69dc';
 
     const payload = {
       target_id,
