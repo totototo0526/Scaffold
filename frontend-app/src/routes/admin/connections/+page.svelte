@@ -85,6 +85,10 @@
     <div class="management-section">
       <NewConnectionForm on:registerSuccess={fetchTargets} />
     </div>
+
+    <div class="back-to-top-container">
+      <a href="/" class="back-to-top-button">TOPへ戻る</a>
+    </div>
   </div>
 </main>
 
@@ -155,4 +159,21 @@
     .admin-link:hover {
         background-color: #455a64;
     }
+  .back-to-top-container {
+    margin-top: 32px;
+    text-align: center;
+  }
+  .back-to-top-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #607d8b;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    transition: background-color 0.2s;
+  }
+  .back-to-top-button:hover {
+    background-color: #455a64;
+  }
 </style>
