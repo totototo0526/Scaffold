@@ -3,7 +3,14 @@
   import NewConnectionForm from '$lib/NewConnectionForm.svelte';
   import { onMount } from 'svelte';
 
-  let targets: Array<{ target_id: string; target_display_name: string }> = [];
+  let targets: Array<{
+    target_id: string;
+    target_display_name: string;
+    db_host: string;
+    db_port: number;
+    db_name: string;
+    db_user: string;
+  }> = [];
   let message = { type: '', text: '' };
 
   async function fetchTargets() {
