@@ -32,7 +32,7 @@
   <div class="view-header">
     <!-- view_idが入力されていればそれを表示、なければ「(新規)」と表示 -->
     <h3>画面定義: {view.content_title || view.view_id || '(新規)'}</h3>
-    <button on:click={handleDelete} class="delete-view-button" title="この画面定義を削除">×</button>
+    <button type="button" on:click={handleDelete} class="delete-view-button" title="この画面定義を削除">×</button>
   </div>
 
   <!-- 画面定義の基本情報を入力するフォーム -->
