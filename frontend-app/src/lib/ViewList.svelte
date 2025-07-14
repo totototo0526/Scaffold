@@ -42,7 +42,7 @@ import type { Item, View } from '$lib/types';
     <ViewDefinition bind:view allViews={views} on:delete={handleDeleteView} />
   {/each}
 
-  <button on:click={handleAddView} class="add-view-button">
+  <button type="button" on:click={handleAddView} class="add-view-button">
     + 画面定義を追加
   </button>
 </div>
