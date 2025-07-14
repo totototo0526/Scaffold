@@ -14,7 +14,7 @@
   let message = { type: '', text: '' };
 
   async function fetchTargets() {
-    const apiUrl = `https://n8n.totototo0526.site/webhook/get-targets?timestamp=${Date.now()}`;
+    const apiUrl = `https://n8n.totototo0526.site/webhook/8d025c10-75db-4b8a-957b-ebb04c321683?timestamp=${Date.now()}`;
     const response = await fetch(apiUrl);
     if (response.ok) {
       const data = await response.json();
