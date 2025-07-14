@@ -40,7 +40,7 @@
   <label><input type="checkbox" bind:checked={item.is_search_filter} /> 検索</label>
 </span>
 <input class="col-sort-key" type="number" placeholder="表示順" bind:value={item.sort_key} />
-<button class="col-delete" on:click={handleDelete}>削除</button>
+<button type="button" class="col-delete" on:click={handleDelete}>削除</button>
 
 <style>
   /* 各コンポーネントに閉じたスタイルを記述できます */
