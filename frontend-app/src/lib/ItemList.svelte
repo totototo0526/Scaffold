@@ -58,7 +58,7 @@
     {/each}
   </div>
 
-  <button on:click={handleAddItem} class="add-button">
+  <button type="button" on:click={handleAddItem} class="add-button">
     + 項目を追加
   </button>
 </div>
