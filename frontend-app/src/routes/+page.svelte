@@ -49,13 +49,11 @@
         // DefinitionFormからの画面定義データ（旧：definitionPayload）
         const def = event.detail;
 
-        // 接続先IDとパスワードを取得
-        const db_target_id = selectedTargetId;
-
         // creator_id, views, itemsをトップレベルに展開
         const payload = {
-            target_id: selectedTargetId,
+            db_target_id: selectedTargetId, // 接続先DBのID
             password: password,
+            target_id: def.target_id, // こちらがDefinitionFormからのtarget_id
             creator_id: def.creator_id,
             views: def.views,
             items: def.items
