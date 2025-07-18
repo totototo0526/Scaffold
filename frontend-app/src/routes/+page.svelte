@@ -66,7 +66,7 @@
             // TODO: このURLを、実際のn8nのWebhook URLに書き換えてください
             //   const n8nWebhookUrl = 'https://n8n.totototo0526.site/webhook/603d0cf0-ec23-48e9-bcf2-7675aefd4e4a';
             const n8nWebhookUrl =
-                "https://n8n.totototo0526.site/webhook-test/603d0cf0-ec23-48e9-bcf2-7675aefd4e4a";
+                "https://n8n.totototo0526.site/webhook/603d0cf0-ec23-48e9-bcf2-7675aefd4e4a";
 
             const response = await fetch(n8nWebhookUrl, {
                 method: "POST",
